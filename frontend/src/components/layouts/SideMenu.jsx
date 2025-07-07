@@ -19,6 +19,8 @@ const SideMenu = ({ activeMenu }) => {
   };
 
   const handelLogout = () => {
+    const confirmLogout = window.confirm("Are you sure you want to logout?");
+    if (!confirmLogout) return;
     localStorage.clear();
     clearUser();
     navigate("/login");
