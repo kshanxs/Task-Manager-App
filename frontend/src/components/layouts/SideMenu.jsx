@@ -76,12 +76,12 @@ const SideMenu = ({ activeMenu }) => {
         </button>
       ))}
       <Modal isOpen={showLogoutModal} onClose={handleCancelLogout}>
-        <div className="w-72 p-3 flex flex-col items-center">
-          <h2 className="text-lg font-semibold mb-2">Confirm Logout</h2>
-          <p className="mb-3 text-center">Are you sure you want to logout?</p>
-          <div className="flex gap-3">
-            <button className="px-3 py-1.5 bg-primary text-white rounded text-sm" onClick={handelLogout}>Yes, Logout</button>
-            <button className="px-3 py-1.5 bg-gray-300 rounded text-sm" onClick={handleCancelLogout}>Cancel</button>
+        <div className="w-64 bg-white border border-gray-300 rounded-lg shadow-lg p-4 flex flex-col items-center">
+          <h2 className="text-base font-semibold mb-1 text-gray-900">Confirm Logout</h2>
+          <p className="mb-4 text-center text-gray-700 text-sm">Are you sure you want to logout?</p>
+          <div className="flex flex-col w-full gap-2">
+            <button className="w-full px-3 py-2 bg-primary text-white rounded-md text-sm font-medium" onClick={handelLogout}>Yes, Logout</button>
+            <button className="w-full px-3 py-2 bg-gray-200 text-gray-800 rounded-md text-sm font-medium" onClick={handleCancelLogout}>Cancel</button>
           </div>
         </div>
       </Modal>
