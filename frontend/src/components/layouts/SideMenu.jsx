@@ -2,16 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import { SIDE_MENU_DATA, SIDE_MENU_USER_DATA } from "../../utils/data";
 import { UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
+import Modal from "../Modal";
 
 const SideMenu = ({ activeMenu }) => {
     const { user, clearUser } = useContext(UserContext);
   const [sideMenuData, setSideMenuData] = useState([]);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const navigate = useNavigate();
 
   const handleClick = (route) => {
     if (route === "logout") {
-      handelLogout();
+      setShowLogoutModal(true);
       return;
     }
 
@@ -19,11 +21,14 @@ const SideMenu = ({ activeMenu }) => {
   };
 
   const handelLogout = () => {
-    const confirmLogout = window.confirm("Are you sure you want to logout?");
-    if (!confirmLogout) return;
     localStorage.clear();
     clearUser();
     navigate("/login");
+    setShowLogoutModal(false);
+  };
+
+  const handleCancelLogout = () => {
+    setShowLogoutModal(false);
   };
 
   useEffect(() => {
@@ -32,7 +37,8 @@ const SideMenu = ({ activeMenu }) => {
     }
     return () => {};
   }, [user]);
-  return <div className="w-64 h-[calc(100vh-61px)] bg-white border-r border-gray-200/50 sticky top-[61px] z-20">
+  return (
+    <div className="w-64 h-[calc(100vh-61px)] bg-white border-r border-gray-200/50 sticky top-[61px] z-20">
       <div className="flex flex-col items-center justify-center mb-7 pt-5">
         <div className="relative">
           <img
@@ -69,7 +75,18 @@ const SideMenu = ({ activeMenu }) => {
           {item.label}
         </button>
       ))}
-    </div>;
+      <Modal isOpen={showLogoutModal} onClose={handleCancelLogout}>
+        <div className="p-4 flex flex-col items-center">
+          <h2 className="text-lg font-semibold mb-2">Confirm Logout</h2>
+          <p className="mb-4">Are you sure you want to logout?</p>
+          <div className="flex gap-4">
+            <button className="px-4 py-2 bg-primary text-white rounded" onClick={handelLogout}>Yes, Logout</button>
+            <button className="px-4 py-2 bg-gray-300 rounded" onClick={handleCancelLogout}>Cancel</button>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  );
 };
 
 export default SideMenu;
