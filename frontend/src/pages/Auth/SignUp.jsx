@@ -135,7 +135,7 @@ const SignUp = () => {
               value={fullName}
               onChange={({ target }) => setFullName(target.value)}
               label="Full Name"
-              placeholder="Naina"
+              placeholder="Name"
               type="text"
             />
 
@@ -143,7 +143,7 @@ const SignUp = () => {
               value={email}
               onChange={({ target }) => setEmail(target.value)}
               label="Email Address"
-              placeholder="naina@example.com"
+              placeholder="abc@example.com"
               type="text"
             />
 
